@@ -4,12 +4,18 @@ import type { RequestStatus } from "@/common/types"
 import { createAppSlice, handleServerAppError, handleServerNetworkError } from "@/common/utils"
 import { todolistsApi } from "@/features/todolists/api/todolistsApi"
 import { type Todolist, todolistSchema } from "@/features/todolists/api/todolistsApi.types"
+import { clearDataAC } from "@/common/actions"
 
 export const todolistsSlice = createAppSlice({
   name: "todolists",
   initialState: [] as DomainTodolist[],
   selectors: {
     selectTodolists: (state) => state,
+  },
+  extraReducers: (builder) => {
+    builder.addCase(clearDataAC, (_state, action) => {
+      return action.payload.todolists
+    })
   },
   reducers: (create) => ({
     fetchTodolistsTC: create.asyncThunk(

@@ -11,8 +11,11 @@ import Switch from "@mui/material/Switch"
 import Toolbar from "@mui/material/Toolbar"
 import LinearProgress from "@mui/material/LinearProgress"
 import { logoutTC, selectIsLoggedIn } from "@/features/auth/model/auth-slice"
+import { useNavigate } from "react-router"
+import { Path } from "@/common/routing"
 
 export const Header = () => {
+  const navigate = useNavigate()
   const themeMode = useAppSelector(selectThemeMode)
   const status = useAppSelector(selectAppStatus)
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
@@ -29,6 +32,10 @@ export const Header = () => {
     dispatch(logoutTC())
   }
 
+  const faqHandler = () => {
+    navigate(Path.Faq)
+  }
+
   return (
     <AppBar position="static" sx={{ mb: "30px" }}>
       <Toolbar>
@@ -38,7 +45,12 @@ export const Header = () => {
           </IconButton>
           <div>
             {isLoggedIn && <NavButton onClick={logoutHandler}>Sign out</NavButton>}
-            <NavButton background={theme.palette.primary.dark}>Faq</NavButton>
+            <NavButton
+              background={isLoggedIn ? theme.palette.primary.light : theme.palette.primary.dark}
+              onClick={faqHandler}
+            >
+              Faq
+            </NavButton>
             <Switch color={"default"} onChange={changeMode} />
           </div>
         </Container>
