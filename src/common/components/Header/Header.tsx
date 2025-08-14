@@ -1,7 +1,6 @@
 import { changeThemeModeAC, selectAppStatus, selectThemeMode } from "@/app/app-slice.ts"
 import { useAppDispatch, useAppSelector } from "@/common/hooks"
 import { containerSx } from "@/common/styles"
-import { getTheme } from "@/common/theme"
 import { NavButton } from "@/common/components/NavButton/NavButton"
 import MenuIcon from "@mui/icons-material/Menu"
 import AppBar from "@mui/material/AppBar"
@@ -11,18 +10,15 @@ import Switch from "@mui/material/Switch"
 import Toolbar from "@mui/material/Toolbar"
 import LinearProgress from "@mui/material/LinearProgress"
 import { logoutTC, selectIsLoggedIn } from "@/features/auth/model/auth-slice"
-import { useNavigate } from "react-router"
+import { NavLink } from "react-router"
 import { Path } from "@/common/routing"
 
 export const Header = () => {
-  const navigate = useNavigate()
   const themeMode = useAppSelector(selectThemeMode)
   const status = useAppSelector(selectAppStatus)
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
 
   const dispatch = useAppDispatch()
-
-  const theme = getTheme(themeMode)
 
   const changeMode = () => {
     dispatch(changeThemeModeAC({ themeMode: themeMode === "light" ? "dark" : "light" }))
@@ -30,10 +26,6 @@ export const Header = () => {
 
   const logoutHandler = () => {
     dispatch(logoutTC())
-  }
-
-  const faqHandler = () => {
-    navigate(Path.Faq)
   }
 
   return (
@@ -45,12 +37,19 @@ export const Header = () => {
           </IconButton>
           <div>
             {isLoggedIn && <NavButton onClick={logoutHandler}>Sign out</NavButton>}
-            <NavButton
-              background={isLoggedIn ? theme.palette.primary.light : theme.palette.primary.dark}
-              onClick={faqHandler}
+            <NavLink
+              style={{
+                margin: "0px 15px",
+                padding: "10px 20px",
+                textDecoration: "none",
+                fontSize: "15px",
+                color: "white",
+                fontWeight: "600",
+              }}
+              to={Path.Faq}
             >
               Faq
-            </NavButton>
+            </NavLink>
             <Switch color={"default"} onChange={changeMode} />
           </div>
         </Container>
