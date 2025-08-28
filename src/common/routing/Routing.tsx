@@ -3,7 +3,7 @@ import { PageNotFound, ProtectedRoute } from "@/common/components"
 import { Login } from "@/features/auth/ui/Login/Login"
 import { Route, Routes } from "react-router"
 import { useAppSelector } from "@/common/hooks"
-import { selectIsLoggedIn } from "@/features/auth/model/auth-slice"
+import { selectAppIsLoggedIn } from "@/app/app-slice"
 
 export const Path = {
   Main: "/",
@@ -13,11 +13,11 @@ export const Path = {
 } as const
 
 export const Routing = () => {
-  const isLoggedIn = useAppSelector(selectIsLoggedIn)
+  const isLoggedIn = useAppSelector(selectAppIsLoggedIn)
 
   return (
     <Routes>
-      <Route element={<ProtectedRoute isAllowed={isLoggedIn}/>}>
+      <Route element={<ProtectedRoute isAllowed={isLoggedIn} />}>
         <Route path={Path.Main} element={<Main />} />
         <Route path={Path.Faq} element={<h2>Faq</h2>} />
       </Route>
