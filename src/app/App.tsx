@@ -22,11 +22,10 @@ export const App = () => {
 
   useEffect(() => {
     if (isLoading) return
-
+    setIsInitialized(true)
     if (data?.resultCode === ResultCode.Success) {
       dispatch(setIsLoggedIn({ isLoggedIn: true }))
     }
-    setIsInitialized(true)
   }, [isLoading])
 
   if (!isInitialized) {

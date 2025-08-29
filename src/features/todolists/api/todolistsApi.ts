@@ -1,4 +1,3 @@
-import { instance } from "@/common/instance"
 import type { BaseResponse } from "@/common/types"
 import type { Todolist } from "./todolistsApi.types"
 import type { DomainTodolist } from "@/features/todolists/model/todolists-slice"
@@ -37,22 +36,3 @@ export const {
   useDeleteTodolistMutation,
   useChangeTodolistTitleMutation,
 } = todolistsApi
-
-export const _todolistsApi = {
-  getTodolists() {
-    // yes
-    return instance.get<Todolist[]>("/todo-lists")
-  },
-  changeTodolistTitle(payload: { id: string; title: string }) {
-    const { id, title } = payload
-    return instance.put<BaseResponse>(`/todo-lists/${id}`, { title })
-  },
-  createTodolist(title: string) {
-    //yes
-    return instance.post<BaseResponse<{ item: Todolist }>>("/todo-lists", { title })
-  },
-  deleteTodolist(id: string) {
-    //yes
-    return instance.delete<BaseResponse>(`/todo-lists/${id}`)
-  },
-}

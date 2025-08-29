@@ -1,10 +1,9 @@
-import { setAppStatusAC } from "@/app/app-slice"
-import { ResultCode } from "@/common/enums"
 import type { RequestStatus } from "@/common/types"
 import { createAppSlice, handleServerAppError, handleServerNetworkError } from "@/common/utils"
-import { _todolistsApi } from "@/features/todolists/api/todolistsApi"
 import { type Todolist, todolistSchema } from "@/features/todolists/api/todolistsApi.types"
 import { clearDataAC } from "@/common/actions"
+import { setAppStatusAC } from "@/app/app-slice"
+import { ResultCode } from "@/common/enums"
 
 export const todolistsSlice = createAppSlice({
   name: "todolists",
@@ -18,7 +17,7 @@ export const todolistsSlice = createAppSlice({
     })
   },
   reducers: (create) => ({
-    fetchTodolistsTC: create.asyncThunk(
+       fetchTodolistsTC: create.asyncThunk(
       async (_, { dispatch, rejectWithValue }) => {
         try {
           dispatch(setAppStatusAC({ status: "loading" }))
@@ -131,14 +130,7 @@ export const todolistsSlice = createAppSlice({
 })
 
 export const { selectTodolists } = todolistsSlice.selectors
-export const {
-  fetchTodolistsTC,
-  createTodolistTC,
-  deleteTodolistTC,
-  changeTodolistTitleTC,
-  changeTodolistFilterAC,
-  changeTodolistStatusAC,
-} = todolistsSlice.actions
+export const { changeTodolistFilterAC, changeTodolistStatusAC } = todolistsSlice.actions
 export const todolistsReducer = todolistsSlice.reducer
 
 export type DomainTodolist = Todolist & {
