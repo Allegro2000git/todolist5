@@ -1,6 +1,6 @@
 import type { LoginInputs } from "@/features/auth/lib/schemas"
 import type { BaseResponse } from "@/common/types"
-import { baseApi } from "@/app/baseApi"
+import { baseApi } from "@/app/api/baseApi"
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

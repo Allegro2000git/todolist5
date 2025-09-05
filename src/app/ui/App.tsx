@@ -1,4 +1,4 @@
-import { selectThemeMode, setIsLoggedIn } from "@/app/app-slice"
+import { selectThemeMode, setIsLoggedIn } from "@/app/model/app-slice"
 import { ErrorSnackbar, Header } from "@/common/components"
 import { useAppDispatch, useAppSelector } from "@/common/hooks"
 import { Routing } from "@/common/routing"

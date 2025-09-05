@@ -4,7 +4,7 @@ import {
   selectAppStatus,
   selectThemeMode,
   setIsLoggedIn,
-} from "@/app/app-slice.ts"
+} from "@/app/model/app-slice.ts"
 import { useAppDispatch, useAppSelector } from "@/common/hooks"
 import { containerSx } from "@/common/styles"
 import { NavButton } from "@/common/components/NavButton/NavButton"

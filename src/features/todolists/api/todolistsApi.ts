@@ -1,7 +1,7 @@
 import type { BaseResponse } from "@/common/types"
 import type { Todolist } from "./todolistsApi.types"
 import type { DomainTodolist } from "@/features/todolists/model/todolists-slice"
-import { baseApi } from "@/app/baseApi"
+import { baseApi } from "@/app/api/baseApi"
 
 export const todolistsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

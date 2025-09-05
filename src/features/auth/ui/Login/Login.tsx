@@ -1,4 +1,4 @@
-import { selectThemeMode, setIsLoggedIn } from "@/app/app-slice"
+import { selectThemeMode, setIsLoggedIn } from "@/app/model/app-slice"
 import { useAppDispatch, useAppSelector } from "@/common/hooks"
 import { getTheme } from "@/common/theme"
 import { type LoginInputs, loginSchema } from "@/features/auth/lib/schemas"

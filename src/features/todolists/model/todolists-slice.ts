@@ -2,7 +2,7 @@ import type { RequestStatus } from "@/common/types"
 import { createAppSlice, handleServerAppError, handleServerNetworkError } from "@/common/utils"
 import { type Todolist, todolistSchema } from "@/features/todolists/api/todolistsApi.types"
 import { clearDataAC } from "@/common/actions"
-import { setAppStatusAC } from "@/app/app-slice"
+import { setAppStatusAC } from "@/app/model/app-slice"
 import { ResultCode } from "@/common/enums"
 
 export const todolistsSlice = createAppSlice({
@@ -17,7 +17,7 @@ export const todolistsSlice = createAppSlice({
     })
   },
   reducers: (create) => ({
-       fetchTodolistsTC: create.asyncThunk(
+    fetchTodolistsTC: create.asyncThunk(
       async (_, { dispatch, rejectWithValue }) => {
         try {
           dispatch(setAppStatusAC({ status: "loading" }))

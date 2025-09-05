@@ -1,9 +1,9 @@
-import { Main } from "@/app/Main"
+import { Main } from "@/app/ui/Main"
 import { PageNotFound, ProtectedRoute } from "@/common/components"
 import { Login } from "@/features/auth/ui/Login/Login"
 import { Route, Routes } from "react-router"
 import { useAppSelector } from "@/common/hooks"
-import { selectAppIsLoggedIn } from "@/app/app-slice"
+import { selectAppIsLoggedIn } from "@/app/model/app-slice"
 
 export const Path = {
   Main: "/",

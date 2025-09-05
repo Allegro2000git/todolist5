@@ -17,10 +17,10 @@ type Props = {
 }
 
 export const TaskItem = ({ todolist, task }: Props) => {
-  const [DeleteTaskMutation] = useDeleteTaskMutation()
+  const [deleteTaskMutation] = useDeleteTaskMutation()
   const [updateTask] = useUpdateTaskMutation()
 
-  const deleteTask = () => DeleteTaskMutation({ todolistId: todolist.id, taskId: task.id })
+  const deleteTask = () => deleteTaskMutation({ todolistId: todolist.id, taskId: task.id })
 
   const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
     const status = e.currentTarget.checked ? TaskStatus.Completed : TaskStatus.New

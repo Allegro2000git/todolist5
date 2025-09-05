@@ -1,4 +1,4 @@
-import { setAppStatusAC } from "@/app/app-slice"
+import { setAppStatusAC } from "@/app/model/app-slice"
 import type { RootState } from "@/app/store"
 import { ResultCode } from "@/common/enums"
 import { createAppSlice, handleServerAppError, handleServerNetworkError } from "@/common/utils"
