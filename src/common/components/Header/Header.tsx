@@ -20,6 +20,7 @@ import { Path } from "@/common/routing"
 import { useLogoutMutation } from "@/features/auth/api/authApi"
 import { ResultCode } from "@/common/enums"
 import { AUTH_TOKEN } from "@/common/constants"
+import { baseApi } from "@/app/api/baseApi"
 
 export const Header = () => {
   const themeMode = useAppSelector(selectThemeMode)
@@ -42,6 +43,9 @@ export const Header = () => {
           localStorage.removeItem(AUTH_TOKEN)
           dispatch(setIsLoggedIn({ isLoggedIn: false }))
         }
+      })
+      .then(() => {
+        dispatch(baseApi.util.invalidateTags(["Todolist", "Task"]))
       })
   }
 

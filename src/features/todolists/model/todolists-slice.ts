@@ -114,23 +114,11 @@ export const todolistsSlice = createAppSlice({
         },
       },
     ),
-    changeTodolistFilterAC: create.reducer<{ id: string; filter: FilterValues }>((state, action) => {
-      const todolist = state.find((todolist) => todolist.id === action.payload.id)
-      if (todolist) {
-        todolist.filter = action.payload.filter
-      }
-    }),
-    changeTodolistStatusAC: create.reducer<{ id: string; entityStatus: RequestStatus }>((state, action) => {
-      const todolist = state.find((todolist) => todolist.id === action.payload.id)
-      if (todolist) {
-        todolist.entityStatus = action.payload.entityStatus
-      }
-    }),
   }),
 })
 
 export const { selectTodolists } = todolistsSlice.selectors
-export const { changeTodolistFilterAC, changeTodolistStatusAC } = todolistsSlice.actions
+export const {} = todolistsSlice.actions
 export const todolistsReducer = todolistsSlice.reducer
 
 export type DomainTodolist = Todolist & {
