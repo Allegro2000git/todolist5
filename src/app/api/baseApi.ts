@@ -13,10 +13,9 @@ export const baseApi = createApi({
         headers.set("API-KEY", import.meta.env.VITE_API_KEY)
       },
     })(args, api, extraOptions)
-
     handleError(api, res)
-
     return res
   },
+  refetchOnReconnect: true,
   endpoints: () => ({}),
 })
