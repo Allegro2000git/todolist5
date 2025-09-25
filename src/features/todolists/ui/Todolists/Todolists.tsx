@@ -4,7 +4,7 @@ import { TodolistItem } from "./TodolistItem/TodolistItem"
 import { useGetTodolistsQuery } from "@/features/todolists/api/todolistsApi"
 import Box from "@mui/material/Box"
 import { containerSx } from "@/common/styles"
-import { TodolistSkeleton } from "@/features/todolists/ui/Todolists/TodolistSkeleton/TodolistSkeleton"
+import { TodolistSkeleton } from "@/features/todolists/ui/Todolists/TodolistSkeleton"
 
 export const Todolists = () => {
   const { data: todolists, isLoading } = useGetTodolistsQuery()

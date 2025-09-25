@@ -1,6 +1,7 @@
 import type { LoginInputs } from "@/features/auth/lib/schemas"
 import type { BaseResponse } from "@/common/types"
 import { baseApi } from "@/app/api/baseApi"
+import type { CaptchaResponse } from "@/features/auth/api/authApi.types"
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -13,7 +14,10 @@ export const authApi = baseApi.injectEndpoints({
     logout: builder.mutation<BaseResponse, void>({
       query: () => ({ method: "delete", url: "/auth/login" }),
     }),
+    captcha: builder.query<CaptchaResponse, void>({
+      query: () => ({ method: "get", url: "/security/get-captcha-url" }),
+    }),
   }),
 })
 
-export const { useMeQuery, useLoginMutation, useLogoutMutation } = authApi
+export const { useMeQuery, useLoginMutation, useLogoutMutation, useLazyCaptchaQuery } = authApi

@@ -2,10 +2,11 @@ import { TaskStatus } from "@/common/enums"
 import { TaskItem } from "./TaskItem/TaskItem"
 import List from "@mui/material/List"
 import { useGetTasksQuery } from "@/features/todolists/api/tasksApi"
-import { TasksSkeleton } from "@/features/todolists/ui/Todolists/TodolistItem/Tasks/TasksSkeleton/TasksSkeleton"
 import type { DomainTodolist } from "@/features/todolists/lib/types/types"
 import { useState } from "react"
-import { TasksPagination } from "@/features/todolists/ui/Todolists/TodolistItem/Tasks/TasksPagination/TasksPagination"
+import { TasksSkeleton } from "@/features/todolists/ui/Todolists/TodolistItem/Tasks/TasksSkeleton"
+import { TasksPagination } from "@/features/todolists/ui/Todolists/TodolistItem/Tasks/TasksPagination"
+import { PAGE_SIZE } from "@/common/constants"
 
 type Props = {
   todolist: DomainTodolist
@@ -37,7 +38,9 @@ export const Tasks = ({ todolist }: Props) => {
       ) : (
         <>
           <List>{filteredTasks?.map((task) => <TaskItem key={task.id} task={task} todolist={todolist} />)}</List>
-          <TasksPagination totalCount={data?.totalCount || 0} page={page} setPage={setPage} />
+          {data!.totalCount > PAGE_SIZE && (
+            <TasksPagination totalCount={data?.totalCount || 0} page={page} setPage={setPage} />
+          )}
         </>
       )}
     </>

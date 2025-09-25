@@ -13,9 +13,10 @@ import Grid from "@mui/material/Grid"
 import TextField from "@mui/material/TextField"
 import { Controller, type SubmitHandler, useForm } from "react-hook-form"
 import styles from "./Login.module.css"
-import { useLoginMutation } from "@/features/auth/api/authApi"
+import { useLazyCaptchaQuery, useLoginMutation } from "@/features/auth/api/authApi"
 import { ResultCode } from "@/common/enums"
 import { AUTH_TOKEN } from "@/common/constants"
+import { useState } from "react"
 
 export const Login = () => {
   const themeMode = useAppSelector(selectThemeMode)
@@ -24,16 +25,20 @@ export const Login = () => {
   const theme = getTheme(themeMode)
 
   const [loginMutation] = useLoginMutation()
+  const [trigger, { data: dataCaptcha }] = useLazyCaptchaQuery()
+
+  const [isCaptcha, setIsCaptcha] = useState<boolean>(false)
 
   const {
     register,
     handleSubmit,
     reset,
     control,
+    setError,
     formState: { errors },
   } = useForm<LoginInputs>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "", rememberMe: false },
+    defaultValues: { email: "", password: "", rememberMe: false, captcha: undefined },
   })
 
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
@@ -42,8 +47,19 @@ export const Login = () => {
       .then((data) => {
         if (data?.resultCode === ResultCode.Success) {
           dispatch(setIsLoggedIn({ isLoggedIn: true }))
-          localStorage.setItem(AUTH_TOKEN, data.data.token)
+          if ("token" in data.data) {
+            localStorage.setItem(AUTH_TOKEN, data.data.token)
+          }
           reset()
+        }
+        if (data?.resultCode === ResultCode.CaptchaError) {
+          trigger()
+            .unwrap()
+            .then(() => {
+              setIsCaptcha(true)
+              const errorMessage = JSON.stringify(data.messages?.[0])
+              setError("captcha", { message: errorMessage })
+            })
         }
       })
   }
@@ -93,6 +109,20 @@ export const Login = () => {
                 />
               }
             />
+            {isCaptcha && (
+              <>
+                <img src={dataCaptcha?.url} alt="captcha" />
+                {errors.captcha && <span className={styles.errorMessage}>{errors.captcha.message}</span>}
+                <TextField
+                  size="small"
+                  label="Type the text from the image"
+                  margin="normal"
+                  error={!!errors.captcha}
+                  autoComplete="off"
+                  {...register("captcha")}
+                />
+              </>
+            )}
             <Button type="submit" variant="contained" color="primary">
               Login
             </Button>
