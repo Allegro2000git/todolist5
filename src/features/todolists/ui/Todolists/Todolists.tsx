@@ -2,7 +2,7 @@ import Grid from "@mui/material/Grid"
 import Paper from "@mui/material/Paper"
 import { TodolistItem } from "./TodolistItem/TodolistItem"
 import { useGetTodolistsQuery } from "@/features/todolists/api/todolistsApi"
-import Box from "@mui/material/Box"
+import { Box } from "@mui/material"
 import { containerSx } from "@/common/styles"
 import { TodolistSkeleton } from "@/features/todolists/ui/Todolists/TodolistSkeleton"
 

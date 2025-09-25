@@ -1,13 +1,16 @@
 {
   "name": "todolist-17",
   "private": true,
+  "homepage": "https://Allegro2000git.github.io/todolist5",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc -b && vite build",
     "test": "vitest",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "pnpm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
@@ -16,7 +19,6 @@
     "@mui/icons-material": "7.1.1",
     "@mui/material": "7.1.1",
     "@reduxjs/toolkit": "2.8.2",
-    "axios": "1.10.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "7.58.1",
