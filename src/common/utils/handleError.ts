@@ -21,6 +21,7 @@ export const handleError = (
         error = "403 Forbidden Error. Check API-KEY"
         break
       case 400:
+      case 401:
         if (isErrorWithMessage(result.error.data)) {
           error = result.error.data.message
         } else {
