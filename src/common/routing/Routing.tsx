@@ -6,9 +6,9 @@ import { useAppSelector } from "@/common/hooks"
 import { selectAppIsLoggedIn } from "@/app/model/app-slice"
 
 export const Path = {
-  Main: "/",
-  Login: "/login",
-  Faq: "/faq",
+  Main: "todolist5/",
+  Login: "todolist5/login",
+  Faq: "todolist5/faq",
   NotFound: "*",
 } as const
 
