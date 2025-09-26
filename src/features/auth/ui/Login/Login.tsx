@@ -15,8 +15,8 @@ import { Controller, type SubmitHandler, useForm } from "react-hook-form"
 import styles from "./Login.module.css"
 import { useLazyCaptchaQuery, useLoginMutation } from "@/features/auth/api/authApi"
 import { ResultCode } from "@/common/enums"
-import { AUTH_TOKEN } from "@/common/constants"
 import { useState } from "react"
+import { AUTH_TOKEN } from "@/common/constants"
 
 export const Login = () => {
   const themeMode = useAppSelector(selectThemeMode)
